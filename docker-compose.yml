@@ -1,0 +1,33 @@
+version: '2'
+services:
+  web:
+    image: webdevops/php-nginx-dev:7.1
+    container_name: dev-skeleton-web
+    hostname: dev.skeleton.siworks.com.br
+    working_dir: /app
+    depends_on:
+      - mysql
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+    volumes:
+      - ./:/app
+      - ~/.ssh:/root/.ssh
+  mysql:
+    image: mysql/mysql-server:5.7
+    container_name: dev-skeleton-mysql
+    hostname: dev-skeleton-mysql
+    volumes:
+      - /etc/localtime:/etc/localtime
+    environment:
+      - MYSQL_ROOT_PASSWORD=siworks
+      - MYSQL_DATABASE=siworks
+      - MYSQL_USER=siworks
+      - MYSQL_PASSWORD=siworks
+
+  composer:
+    image: composer/composer
+    network_mode: host
+    command: install --ignore-platform-reqs --prefer-dist -o
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ./:/app

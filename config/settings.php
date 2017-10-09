@@ -29,10 +29,10 @@ return [
             ],
             'connection' => [
                 'driver'   => 'pdo_mysql',
-                'host'     => '172.19.0.2',
-                'dbname'   => 'billing',
-                'user'     => 'billing',
-                'password' => 'billing',
+                'host'     => 'mysql',
+                'dbname'   => 'siworks',
+                'user'     => 'siworks',
+                'password' => 'siworks',
             ]
         ],
 
